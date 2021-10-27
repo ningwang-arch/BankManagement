@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="static/css/normalize.min.css">
+    <link rel="stylesheet" href="static/css/login.css">
+    <style type="text/css" id="photoShowStyles_pointerNone">
+        *:before,
+        *:after {
+            pointer-events: none !important
+        }
+    </style>
+</head>
+
+<body>
+    <div id="formContainer" class="dwo">
+        <div class="formLeft"><img src="static/img/avatar.jpg"></div>
+        <div class="formRight">
+            <!-- Login form -->
+            <form id="login" action="/login" method="POST">
+                <header>
+                    <h1>欢迎回来</h1>
+                    <p>请先登录</p>
+                </header>
+                <section>
+                    <label>
+                        <p>用户名</p><input type="text" placeholder=" " name="user" id="l_user" required>
+                        <div class="border"></div>
+                    </label>
+                    <label>
+                        <p>密码</p><input type="password" placeholder=" " name="passwd" id="l_passwd" required>
+                        <div class="border"></div>
+                    </label>
+                    <div>
+                        <input style="margin-left: 15%" type="radio" name="role" value="0" checked>User
+                        <input style="margin-left: 25%" type="radio" name="role" value="1">Manager
+                    </div>
+                    <br>
+                    <button type="submit">登 录</button>
+                </section>
+                <footer><button type="button" class="registerBtn">新用户？</button></footer>
+            </form>
+            <!-- Register form -->
+            <form id="register" class="otherForm" action="/register" method="POST" onsubmit="return check_reg()">
+                <header>
+                    <h1>用户注册</h1>
+                    <p>注册后享受更多服务</p>
+                </header>
+                <section><label>
+                        <p>用户名</p><input type="text" placeholder=" " name="user" id="user" required>
+                        <div class="border"></div>
+                    </label><label>
+                        <p>密码</p><input type="password" placeholder=" " name="passwd" id="passwd" required>
+                        <div class="border"></div>
+                    </label><label>
+                        <p>重复密码</p><input type="password" placeholder=" " name="re_passwd" id="re_passwd" required>
+                        <div class="border"></div>
+                    </label>
+                    <br>
+                    <br>
+                    <button type="submit">注 册</button>
+                </section>
+                <footer><button type="button" class="registerBtn">返回</button></footer>
+            </form>
+        </div>
+    </div>
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/script.js"></script>
+    {{{message}}}
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="static/css/amazeui.min.css">
+    <link rel="stylesheet" href="static/css/admin.css">
+    <style>
+        .admin-main {
+            padding-top: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="am-cf admin-main">
+        <!-- content start -->
+        <div class="admin-content">
+            <div class="admin-content-body">
+                <div class="am-g">
+                    <form class="am-form am-form-horizontal" method="post" style="padding-top:30px;" data-am-validator action="/updateInfo.html" onsubmit="return checkInput();">
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">
+							新用户名 </label>
+                            <div class="am-u-sm-9">
+                                <input type="text" id="doc-vld-name-0" placeholder="请输入新用户名" name="name_new"> <small>输入新用户名。</small>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">
+							旧密码 </label>
+                            <div class="am-u-sm-9">
+                                <input type="password" id="doc-vld-pwd-0" required placeholder="请输入旧密码" name="pwd_old"> <small>输入旧密码。</small>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">
+							新密码 </label>
+                            <div class="am-u-sm-9">
+                                <input type="password" id="doc-vld-pwd-1" required placeholder="请输入新密码" name="password"> <small>输入新密码。</small>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">
+								重复密码</label>
+                            <div class="am-u-sm-9">
+                                <input type="password" id="doc-vld-pwd-2" required placeholder="请输入重复密码" name="pwd" data-equal-to="#doc-vld-pwd-1" required> <small>输入重复密码。</small>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <div class="am-u-sm-9 am-u-sm-push-3">
+                                <input type="submit" class="am-btn am-btn-success" value="修改密码" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="static/js/jquery.min.js">
+    </script>
+    <script type="text/javascript" src="static/js/plugs.js">
+    </script>
+    <script type="text/javascript">
+        function checkInput() {
+            var new_pwd = document.getElementById("doc-vld-pwd-1").value;
+            var new_pwd_re = document.getElementById("doc-vld-pwd-2").value;
+            if (new_pwd != new_pwd_re) {
+                alert("新旧密码不一致");
+                return false;
+            }
+            return true;
+        }
+    </script>
+    {{{script}}}
+</body>
+
+</html>

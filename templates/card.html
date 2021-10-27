@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../static/css/amazeui.min.css" />
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/script.js"></script>
+    <link rel="stylesheet" href="../static/css/admin.css" />
+</head>
+
+<body>
+    <div style="height: 450px; width: auto; overflow: auto;">
+        <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+                <tr>
+                    <th class="table-id">卡号</th>
+                    <th class="table-title">状态</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{{info}}}
+            </tbody>
+        </table>
+    </div>
+    <div style="text-align:center">
+        <button style="border-radius: 10px; height: 50px; width: 300px; border: none;" onclick="newCard();">
+        <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-plus">
+            <path fill-rule="evenodd" d="M7.75 2a.75.75 0 01.75.75V7h4.25a.75.75 0 110 1.5H8.5v4.25a.75.75 0 11-1.5 0V8.5H2.75a.75.75 0 010-1.5H7V2.75A.75.75 0 017.75 2z"></path>
+        </svg>
+        </button>
+    </div>
+    <script>
+        $('#group .btn').on('click', function() {
+            var parent = $(this).parent().parent().parent().parent();
+            var item = parent.children()[0].innerText;
+            var othis = $(this),
+                method = othis.data('method');
+            active[method] ? active[method].call(this, othis) : '';
+        });
+
+        var active = {
+
+            freeze: function() {
+                var parent = $(this).parent().parent().parent().parent();
+                var item = parent.children()[0].innerText;
+                postcard(item, "Frozen")
+            },
+            unfreeze: function() {
+                var parent = $(this).parent().parent().parent().parent();
+                var item = parent.children()[0].innerText;
+                postcard(item, "Normal")
+            },
+            lost: function() {
+                var parent = $(this).parent().parent().parent().parent();
+                var item = parent.children()[0].innerText;
+                postcard(item, "Lost")
+            }
+        };
+
+        function postcard(id, opt) {
+            info = {
+                "id": id,
+                "opt": opt
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/card_about',
+                data: JSON.stringify(info),
+                contentType: 'application/json; charset=UTF-8',
+                dataType: 'json',
+                success: function(data) {
+                    alert("更改成功")
+                },
+                error: function(xhr, type) {
+                    alert("error")
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>

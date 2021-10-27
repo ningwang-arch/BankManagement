@@ -1,0 +1,33 @@
+<div class="admin-content white_content" id="light_money">
+    <div class="admin-content-body">
+        <div class="am-g">
+            <form class="am-form am-form-horizontal" style="padding-top:30px;" data-am-validator="" onsubmit="return card(this);" action="" method="post">
+                <div class="am-form-group">
+                    <label for="user-name" class="am-u-sm-3 am-form-label">
+							卡号 </label>
+                    <div class="am-u-sm-9">
+                        <input type="text" id="doc-money-1" required="" name="card_id" vaule="" readonly> <small></small>
+                    </div>
+                </div>
+                <div class="am-form-group">
+                    <label for="user-name" class="am-u-sm-3 am-form-label">
+								金额</label>
+                    <div class="am-u-sm-9">
+                        <input type="text" id="doc-amount-1" required="" placeholder="请输入金额" name="amount"> <small>输入金额。</small>
+                    </div>
+                </div>
+                <div class="am-form-group">
+                    <div class="am-u-sm-9 am-u-sm-push-3">
+                        <input type="submit" class="am-btn am-btn-success" style="left: 5%;" value="确定">
+                        <label style="padding: 10%;"></label>
+                        <input type="button" class="am-btn am-btn-default" value="取消" onclick="toggleFade('money')">
+                    </div>
+                    <div class="am-u-sm-9 am-u-sm-push-3">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<div id="fade_money" class="black_overlay"></div>

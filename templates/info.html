@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="static/css/amazeui.min.css" />
+    <link rel="stylesheet" href="static/css/admin.css" />
+    <script src="static/js/layui.js"></script>
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/script.js"></script>
+</head>
+
+
+<body>
+    {{{user_card}}} {{{new}}} {{{edit}}}
+    <div class="admin-content-body">
+        <div class="am-cf am-padding am-padding-bottom-0">
+            <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">信息管理</strong><small></small></div>
+        </div>
+        <hr>
+
+        <div class="am-g">
+            <div class="am-u-sm-12 am-u-md-6">
+                {{#nuser}}
+                <div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <button type="button" class="am-btn am-btn-default" onclick="toggleFade('new')"><span></span> 新增</button>
+                    </div>
+                </div>
+                {{/nuser}}
+            </div>
+            <div class="am-u-sm-12 am-u-md-3">
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-sm-12">
+                <form class="am-form">
+                    <table class="am-table am-table-striped am-table-hover table-main">
+                        {{{table}}}
+                    </table>
+                    <hr>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggleFade(str) {
+            var light = "light_" + str;
+            var fade = "fade_" + str;
+            if (document.getElementById(light).style.display == "none") {
+                document.getElementById(light).style.display = "block";
+                document.getElementById(fade).style.display = "block";
+            } else {
+                document.getElementById(light).style.display = "none";
+                document.getElementById(fade).style.display = "none";
+            }
+        }
+    </script>
+    {{#label}}
+    <script src="static/js/plugs.js"></script>
+    <script>
+        layui.config({
+            version: "2.0.0",
+        }).extend({
+            fly: 'index'
+        }).use('fly');
+        //添加编辑弹出层
+        function user_info(data, title, id) {
+            var parentTr = data.parentNode
+            var id = parentTr.children[0].innerText
+            $.jq_Panel({
+                title: id,
+                iframeWidth: 800,
+                iframeHeight: 500,
+                url: "/userInfo/" + id
+            });
+        }
+    </script>
+    {{/label}} {{{message}}} {{#user}}
+    <script src="static/js/plugs.js"></script>
+    <script>
+        layui.config({
+            version: "2.0.0",
+        }).extend({
+            fly: 'index'
+        }).use('fly');
+        //添加编辑弹出层
+        function card_log(data, title, id) {
+            console.log(data.innerText);
+            var id = data.innerText;
+            // var parentTr = data.parentNode
+            // var id = parentTr.children[0].innerText
+            $.jq_Panel({
+                title: 'Log',
+                iframeWidth: 800,
+                iframeHeight: 500,
+                url: "/card_log/" + id
+            });
+        }
+    </script>
+    <script>
+        $('#group .btn').on('click', function() {
+            var parent = $(this).parent().parent().parent().parent();
+            var item = parent.children()[0].innerText;
+            var othis = $(this),
+                method = othis.data('method');
+            active[method] ? active[method].call(this, othis) : '';
+        });
+
+        var active = {
+
+            add: function() {
+                var parent = $(this).parent().parent().parent().parent();
+                var item = parent.children()[0].innerText;
+                document.getElementById('doc-money-1').value = item;
+                document.getElementById('doc-money-1').className = "add";
+                toggleFade('money');
+            },
+            sub: function() {
+                var parent = $(this).parent().parent().parent().parent();
+                var item = parent.children()[0].innerText;
+                document.getElementById('doc-money-1').value = item;
+                document.getElementById('doc-money-1').className = "sub";
+                toggleFade('money');
+            }
+        };
+    </script>
+    {{/user}}
+
+</body>
+
+
+</html>
