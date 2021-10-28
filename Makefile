@@ -26,7 +26,7 @@ INCLUDE	:= base/ /usr/include/json/ /usr/include/mysql/ /usr/include/openssl/ we
 # define lib directory
 LIB		:= /usr/lib/mysql/
 
-LIBRARY := jsoncpp mysqlclient ssl crypto  pthread
+LIBRARY := jsoncpp mysqlclient ssl crypto  pthread  boost_program_options
 
 
 MAIN_FILE = main.cpp

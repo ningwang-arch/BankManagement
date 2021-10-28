@@ -17,8 +17,6 @@
 
 #define CROW_STATIC_DIRECTORY "static/"
 
-#define DEFAULT_PORT 11223
-
 #define CROW_STATIC_ENDPOINT "/static/<path>/<path>"
 namespace mw = app::middlewares;
 
@@ -30,7 +28,6 @@ private:
     int port;
 
 public:
-    WebUI() { this->port = DEFAULT_PORT; }
     WebUI(int port);
     void init();
     void start();

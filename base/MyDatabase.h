@@ -3,7 +3,6 @@
 #define _MYDATABASE_H_
 
 #include "Config.h"
-#include "global.h"
 #include <string>
 #include <mysql/mysql.h>
 using namespace std;

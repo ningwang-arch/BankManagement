@@ -1,5 +1,7 @@
 #include "MyDatabase.h"
 
+extern string CONFIG_FILE;
+
 MyDatabase::MyDatabase()
 {
     config.load(CONFIG_FILE);
