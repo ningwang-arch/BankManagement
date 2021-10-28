@@ -17,7 +17,7 @@ int main(int argc, char const *argv[])
     // Declare the supported options.
 
     po::options_description desc("options");
-    desc.add_options()("help,h", "print help message")("config,c", po::value<string>()->default_value("config.json"), "config file")("port,p", po::value<int>()->default_value(8080), "port number");
+    desc.add_options()("help,h", "print help message")("config,c", po::value<string>()->default_value(CONFIG_FILE), "config file")("port,p", po::value<int>()->default_value(DEFAULT_PORT), "port number");
 
     po::variables_map vm;
     po::store(po::parse_command_line(argc, argv, desc), vm);
