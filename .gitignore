@@ -37,4 +37,4 @@
 mysql.json
 .vscode
 output
-test.drawio.png
+*.drawio.png
