@@ -106,6 +106,11 @@ void WebUI::init()
                                                                           }
                                                                           std::string username = post_body["user"];
                                                                           std::string pwd = post_body["passwd"];
+                                                                          if(!check_pwd(pwd)){
+                                                                              res.set_header("Content-Type", "text/plain; charset=utf-8");
+                                                                              res.write("密码非法,请重新输入!");
+                                                                              res.end();
+                                                                          }
                                                                           int role = 0;
                                                                           std::string re_pwd = post_body["re_passwd"];
                                                                           if (pwd != re_pwd)

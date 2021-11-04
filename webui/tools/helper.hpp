@@ -1,6 +1,7 @@
 #pragma once
 #include "tools.hpp"
 #include <boost/format.hpp>
+#include <string>
 #include "crow_all.h"
 #include "Functions.h"
 using namespace std;
@@ -312,6 +313,26 @@ string get_opeartion(crow::json::rvalue info)
         operation = "-" + to_string(amount) + " 元";
     }
     return operation;
+}
+
+bool check_pwd(const string pwd)
+{
+    string decode_pwd = decode_passwd(pwd);
+    if (decode_pwd.length() < 6 || decode_pwd.length() > 16)
+    {
+        return false;
+    }
+    {
+        return false;
+    }
+    for (int i = 0; i < decode_pwd.length(); i++)
+    {
+        if (int(decode_pwd[i]) < 33 || int(decode_pwd[i]) > 126)
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 string get_response_msg(crow::json::rvalue info)
