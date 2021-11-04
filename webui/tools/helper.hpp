@@ -321,31 +321,50 @@ string get_response_msg(crow::json::rvalue info)
     string card_id = info["id"].s();
     string type = info["type"].s();
     int amount = info["amount"].i();
-    string sql = "select balance,status from cards where card_num='" + card_id + "'";
-    map<string, string> list = fun.get_card_list(sql);
-    map<string, string>::iterator it;
-    int balance;
-    string status;
-    for (it = list.begin(); it != list.end(); it++)
+    if (amount < 0)
     {
-        balance = stoi(it->first);
-        string status = it->second;
-    }
-    if (status == "Frozen" || status == "Lost")
-    {
-        msg = "The card status is abnormal and the business is cancelled";
+        msg = "Illegal input";
     }
     else
     {
-        if (type == "sub")
+        string sql = "select balance,status from cards where card_num='" + card_id + "'";
+        map<string, string> list = fun.get_card_list(sql);
+        map<string, string>::iterator it;
+        int balance;
+        string status;
+        for (it = list.begin(); it != list.end(); it++)
         {
-            if (amount > balance)
+            balance = stoi(it->first);
+            string status = it->second;
+        }
+        if (status == "Frozen" || status == "Lost")
+        {
+            msg = "The card status is abnormal and the business is cancelled";
+        }
+        else
+        {
+            if (type == "sub")
             {
-                msg = "Insufficient balance, withdrawal failed";
+                if (amount > balance)
+                {
+                    msg = "Insufficient balance, withdrawal failed";
+                }
+                else
+                {
+                    string sql = "update cards set balance=balance-" + to_string(amount) + " where card_num='" + card_id + "';";
+                    if (fun.update(sql))
+                    {
+                        msg = "Successful withdrawal";
+                    }
+                    else
+                    {
+                        msg = "Withdrawal failed";
+                    }
+                }
             }
-            else
+            else if (type == "add")
             {
-                string sql = "update cards set balance=balance-" + to_string(amount) + " where card_num='" + card_id + "';";
+                string sql = "update cards set balance=balance+" + to_string(amount) + " where card_num='" + card_id + "';";
                 if (fun.update(sql))
                 {
                     msg = "Successful withdrawal";
@@ -355,22 +374,10 @@ string get_response_msg(crow::json::rvalue info)
                     msg = "Withdrawal failed";
                 }
             }
-        }
-        else if (type == "add")
-        {
-            string sql = "update cards set balance=balance+" + to_string(amount) + " where card_num='" + card_id + "';";
-            if (fun.update(sql))
-            {
-                msg = "Successful withdrawal";
-            }
             else
             {
-                msg = "Withdrawal failed";
+                msg = "Invalid operation";
             }
-        }
-        else
-        {
-            msg = "Invalid operation";
         }
     }
     return msg;
